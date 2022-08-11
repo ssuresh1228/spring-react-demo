@@ -10,9 +10,6 @@ function App() {
     <AddEmployee />
     </>
   ) 
-    
 }
 
 export default App;
-
-//28:40 
