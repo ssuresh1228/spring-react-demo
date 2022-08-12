@@ -29,17 +29,13 @@ public class EmployeeServiceImplementation implements EmployeeService {
     @Override
     public List<Employee> getAllEmployees() {
         List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
-        List<Employee> employees = employeeEntities
-                                            .stream()
-                                            .map(emp -> new Employee(
-                                                    emp.getId(),
-                                                    emp.getFirstName(),
-                                                    emp.getLastName(),
-                                                    emp.getEmailID()))
-                                            .collect(Collectors.toList());
-
-        return employees;
+        return employeeEntities
+                .stream()
+                .map(emp -> new Employee(
+                        emp.getId(),
+                        emp.getFirstName(),
+                        emp.getLastName(),
+                        emp.getEmailID()))
+                .collect(Collectors.toList());
     }
-
-
 }
