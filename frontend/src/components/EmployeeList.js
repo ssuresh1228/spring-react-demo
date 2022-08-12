@@ -23,6 +23,16 @@ const EmployeeList = () => {
     fetchData();
   }, []);
     
+  const deleteEmployee = (e, id) => {
+    e.preventDefault();
+    EmployeeService.deleteEmployee(id).then((res) => {
+        if(employees){
+            setEmployees((prevElement) => {
+                return prevElement.filter((employee) => employee.id !== id);
+            })
+        }
+    });
+  }    
 
   return (
     <div className='container mx-auto my-8'>
@@ -39,7 +49,6 @@ const EmployeeList = () => {
                     <tr>
                         <th className='text-left font-medium text-gray-50 tracking-wider py-4 px-6 uppercase'>First Name</th>
                         <th className='text-left font-medium text-gray-50 tracking-wider py-4 px-6 uppercase'>Last Name</th>
-
                         <th className='text-center font-medium text-gray-50 tracking-wider py-4 px-6 uppercase'>Email</th>
                         <th className='text-right font-medium text-gray-50 tracking-wider py-4 px-12 uppercase'>Actions</th>
                     </tr>
@@ -48,7 +57,7 @@ const EmployeeList = () => {
                 {!loading &&( 
                 <tbody className='bg-slate-600'>
                     {employees.map((employee) => (
-                        <Employee employee={employee}></Employee>
+                        <Employee employee={employee} deleteEmployee={deleteEmployee} key = {employee.id}></Employee>
                     ))}
                 </tbody>
                 )}
