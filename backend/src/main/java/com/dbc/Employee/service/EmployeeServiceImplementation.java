@@ -6,10 +6,13 @@ import com.dbc.Employee.repository.EmployeeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class EmployeeServiceImplementation implements EmployeeService {
 
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     public EmployeeServiceImplementation(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -22,5 +25,21 @@ public class EmployeeServiceImplementation implements EmployeeService {
         employeeRepository.save(employeeEntity);
         return employee;
     }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
+        List<Employee> employees = employeeEntities
+                                            .stream()
+                                            .map(emp -> new Employee(
+                                                    emp.getId(),
+                                                    emp.getFirstName(),
+                                                    emp.getLastName(),
+                                                    emp.getEmailID()))
+                                            .collect(Collectors.toList());
+
+        return employees;
+    }
+
 
 }
