@@ -54,4 +54,16 @@ public class EmployeeServiceImplementation implements EmployeeService {
         return employee;
     }
 
+    @Override
+    public Employee updateEmployee(Long id, Employee employee) {
+        EmployeeEntity employeeEntity = employeeRepository.findById(id).get();
+        employeeEntity.setEmailID(employee.getEmailID());
+        employeeEntity.setFirstName(employee.getFirstName());
+        employeeEntity.setLastName(employee.getLastName());
+
+        employeeRepository.save(employeeEntity);
+        return employee;
+    }
+
+
 }
