@@ -1,4 +1,4 @@
-package com.dbc.Employee.repository;
+package com.dbc.Employee.service.repository;
 
 import com.dbc.Employee.entity.EmployeeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
